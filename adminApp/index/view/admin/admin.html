@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>后台中心</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1800">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <span class="user">欢迎您：</span>
+        <div class="title"><span class="login">后 台 中 心</span></div>
+        <div>
+            选手姓名：<input type="text" name="player_name"><br>
+            照片：<input type="file" name="pic"><br>
+            <input type="hidden" name="picUrl">
+            选手信息：<input type="text" name="message"><br>
+            参赛宣言：<input type="text" name="declaration"><br>
+            <button id="sub" class="btn">提交</button>
+        </div>
+        <div class="content">
+            <div class="button">
+                <a href="logout" class="btn btn-danger btn-lg active" role="button">退出登录</a>
+                <a href="changepsw" class="btn btn-success btn-lg active" role="button">修改密码</a>
+            </div>
+        </div>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function upload(picUrl)
+        {
+            var name = $("input[name=player_name]").val();
+            var messages = $("input[name=message]").val();
+            var declarations = $("input[name=declaration]").val();
+            $.ajax({
+                url: '/admin/add',
+                type: 'POST',
+                data: {player_name: name, pic: picUrl, message: messages, declaration: declarations},
+                dataType: 'text',
+                success: function(returnValue){
+                    console.log("success");
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $("#sub").click(function() {
+                var formData = new FormData();
+                formData.append('file', $("input[name=pic]")[0].files[0]);
+            $.ajax({
+                url: '/admin/upload',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                dataType: 'json',
+                success: function(returnValue){
+                    picUrl = returnValue['url'];
+                    upload(picUrl);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+            });
+        });
+    </script>
+</body>
+</html>

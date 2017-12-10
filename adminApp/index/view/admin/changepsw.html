@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>修改密码</title>
+	<meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1800">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="{$Think.config.web_root}css/changepsw.css"> -->
+	<link rel="stylesheet" type="text/css" href="/static/css/changepsw.css">
+</head>
+<body>
+	<div class="container">
+	    <span class="user">欢迎您：{$Think.session.ext_user['admin_name']}</span>
+		<div class="title"><span class="change">修 改 密 码</span></div>
+		<div class="form">
+			<form method="post" action="changepassword">
+				<div class="row">
+					<div class="cur col-lg-12"><span>原密码：</span><input type="password" name="oldpassword" class="form-control" placeholder="请输入原密码"></input></div>
+					<div class="cur col-lg-12"><span>新密码：</span><input type="password" name="newpassword" class="form-control" placeholder="请输入新密码"></input></div>
+					<div class="cur col-lg-12"><span>再次输入新密码：</span><input type="password" name="newpassword1" class="form-control" placeholder="请再次输入新密码"></input></div>
+				</div>
+				<input type="submit" value="提交"  class="btn btn-primary btn-lg btn-block"></input>
+				<a href="admin" type="submit" value="返回上一页"  class="btn btn-success btn-lg btn-block">返回上一页</a>
+			</form>
+		</div>
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

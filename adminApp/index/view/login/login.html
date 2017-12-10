@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="title"><span class="login">登 录</span></div>
+		<div class="form">
+			<form action="logining" method="post">
+		        <input type="text" name="account" class="username form-control" placeholder="用户名">
+		        <input type="password" name="password" class="password form-control" placeholder="密码">
+		        <input type="hidden" name="__token__" value="{$Request.token}">
+		        <button type="submit" class="submit">提交</button>
+		    </form>
+	    </div>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

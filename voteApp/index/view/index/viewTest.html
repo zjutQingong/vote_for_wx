@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Thinkphp模板测试文件</title>
+</head>
+	<div id="container">
+		{volist name="list" id="vo"}
+		<p>这里是Viewtest:test_assign的模板文件.<br></p>
+		<p>名称信息:{$vo.name};<br></p>
+		<p>部门信息:{$vo.department};<br></p>
+		{/volist}
+	</div>
+</body>
+</html>
