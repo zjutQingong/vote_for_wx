@@ -85,9 +85,9 @@ class Admin extends Controller
 	 */
 	public function add()
 	{
-		$result = $this->validate($this->data, 'Player.add');
+		$result = $this->validate($this->data, "Player.add");
 		if (true !== $result) {
-			$error_msg = array('status_code' => '0', 'error_msg' => $result);
+			$error_msg = array("status_code" => -1, "error_msg" => $result);
 			return json_encode($error_msg);
 		}else{
 			$this->player->add($this->data);
@@ -102,12 +102,12 @@ class Admin extends Controller
 	 */
 	public function cut()
 	{
-		$result = $this->validate($this->data, 'Player.cut');
+		$result = $this->validate($this->data, "Player.cut");
 		if (true !== $result) {
-			$error_msg = array('status_code' => '0', 'error_msg' => $result);
+			$error_msg = array("status_code" => -1, "error_msg" => $result);
 			return json_encode($error_msg);
 		}else{
-			$this->player->delete($this->data);
+			$this->player->cut($this->data);
 		}
 	}
 
@@ -119,9 +119,9 @@ class Admin extends Controller
 	 */
 	public function change()
 	{
-		$result = $this->validate($this->data, 'Player.change');
+		$result = $this->validate($this->data, "Player.change");
 		if (true !== $result) {
-			$error_msg = array('status_code' => '0', 'error_msg' => $result);
+			$error_msg = array("status_code" => -1, "error_msg" => $result);
 			return json_encode($error_msg);
 		}else{
 			$this->player->change($this->data);
@@ -148,20 +148,20 @@ class Admin extends Controller
 	{
 		$file = request()->file('file');
 		if ($file) {
-			$info = $file->validate(['size'=>15678,'ext'=>'jpg,png,gif'])->move('images/');
+			$info = $file->validate(["size"=>1024000,"ext"=>"jpg,png,gif"])->move("images/");
 			if ($info) {
 	            // 成功上传后 获取图片路径
-	           	$data = array('url' => '/admin/images/'.$info->getSaveName());
+	           	$data = array("status_code" => 1, "url" => "/admin/images/".$info->getSaveName());
 	            print_r(json_encode($data));
 	            return;
 			}else{
 	            // 上传失败获取错误信息
 	            $result = $file->getError();
-				$error_msg = array('status_code' => '0', 'error_msg' => $result);
+				$error_msg = array("status_code" => -3, "error_msg" => $result);
 				return json_encode($error_msg);
 			}
 		}else{
-			$error_msg = array('status_code' => '0', 'error_msg' => '参数错误!');
+			$error_msg = array("status_code" => -1, "error_msg" => '参数错误!');
 			return json_encode($error_msg);
 		}
 	}

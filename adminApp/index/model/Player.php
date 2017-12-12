@@ -23,7 +23,9 @@ class Player extends Model
 		$this->pic = $arr['pic'];
 		$this->message = $arr['message'];
 		$this->declaration = $arr['declaration'];
-		return $this->save();
+		$this->save();
+		$msg = array("status_code" => 1, "msg" => "添加成功");
+		print_r(json_encode($msg));
 	}
 
 	/**
@@ -35,11 +37,13 @@ class Player extends Model
 	 */
 	public function cut($arr)
 	{
-		if ($arr['player_id']) {
-			$this::get($this->$arr['player_id'])->delete();	
+		if ($this::get($arr['player_id'])) {
+			$this::destroy($arr['player_id']);
+			$msg = array("status_code" => 1, "msg" => "删除成功");	
 		}else{
-			return json_encode("参数错误");
+			$msg = array("status_code" => -2, "msg" => "要删除的数据不存在");
 		}
+		print_r(json_encode($msg));
 	}
 
 	/**
@@ -51,7 +55,13 @@ class Player extends Model
 	 */
 	public function change($arr)
 	{
-		$this->update($arr);
+		if ($this::get($arr['player_id'])) {
+			$this->update($arr);
+			$msg = array("status_code" => 1, "msg" => "修改成功");	
+		}else{
+			$msg = array("status_code" => -2, "msg" => "要修改的数据不存在");
+		}
+		print_r(json_encode($msg));
 	}
 
 	/**
@@ -64,7 +74,7 @@ class Player extends Model
 	{
 		$msg = $this->all();
 		$msg = json_encode($msg);
-		return $msg;
+		print_r(json_encode($msg));
 	}
 
 }
