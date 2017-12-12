@@ -1,6 +1,6 @@
 # vote_for_wx
 这个项目目的在于实现一个在微信端的投票系统
-[API文档](https://zjutqingong.github.io/vote_for_wx/投票系统API.doc)
+[API文档](http://101.132.163.56/showdoc/index.php?s=/1)
 # 一. [投票系统](https://zjutqingong.github.io/vote_for_wx/)
 ## 1.1 入口：微信菜单
 > 获取用户ID
